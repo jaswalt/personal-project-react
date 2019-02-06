@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getGithubUser } from './utils/getGithubUser.js';
+import { getGithubUserRepos, getGithubUserPullRequests } from './utils/getGithubUser.js';
 
 class UsernameForm extends Component {
   constructor(props) {
@@ -18,7 +18,8 @@ class UsernameForm extends Component {
   };
 
   handleSubmit(e) {
-    getGithubUser(this.state.usernameValue);
+    getGithubUserRepos(this.state.usernameValue);
+    getGithubUserPullRequests(this.state.usernameValue);
     e.preventDefault();
   };
 
