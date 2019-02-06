@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getGithubUser } from './utils/getGithubUser.js';
 
 class UsernameForm extends Component {
   constructor(props) {
@@ -6,15 +7,33 @@ class UsernameForm extends Component {
 
     this.state = {
       usernameValue: '',
-
     }
+
+    this.handleChange = (this.handleChange.bind(this));
+    this.handleSubmit = (this.handleSubmit.bind(this));
+  };
+
+  handleChange(e) {
+    this.setState({ usernameValue: e.target.value });
+  };
+
+  handleSubmit(e) {
+    getGithubUser(this.state.usernameValue);
+    e.preventDefault();
   };
 
   render () {
     return (
-      <form id='username-form'>
-        <label for='username-input'>GitHub Username</label>
-        <input type='text' id='username-input' placeholder='username' value={this.state.usernameValue} required></input>
+      <form id='username-form' onSubmit={this.handleSubmit}>
+        <label htmlFor='username-input'>GitHub Username</label>
+        <input 
+          type='text' 
+          id='username-input' 
+          placeholder='username' 
+          value={this.state.usernameValue}
+          onChange={this.handleChange}
+          required>
+        </input>
         <button type='submit'>Submit</button>
       </form>
     );

@@ -1,1 +1,1 @@
-export const getGithubUser = (username) => fetch(`https://api.github.com/users/${username}`)
+export const getGithubUser = (username) => fetch(`https://api.github.com/users/${username}`).then(response => response.json());
