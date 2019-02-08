@@ -1,7 +1,7 @@
 export const getGithubUserRepos = username => fetch(`https://api.github.com/users/${username}/repos`)
   .then(response => response.json())
   .then(data => {
-    const forked = data.filter(repo => repo.fork === true ? repo : null)
+    const forkedRepos = data.filter(repo => repo.fork === true ? repo : null)
       .reduce((acc, curr) => 
         [...acc, 
           {
@@ -11,7 +11,7 @@ export const getGithubUserRepos = username => fetch(`https://api.github.com/user
         ]
       , []);
   
-    return forked;
+    return forkedRepos;
   });
 
 export const getGithubUserPullRequests = username => fetch(`https://api.github.com/users/${username}/events`)
