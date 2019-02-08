@@ -6,7 +6,11 @@ export const getGithubUserRepos = username => fetch(`https://api.github.com/user
         [...acc, 
           {
             name: curr.name,
-            url: curr.url,
+            url: curr.html_url,
+            // TO DO: update url to come from base repo
+            // fetch(curr.url)
+            //   .then(response => response.json())
+            //   .then(response => response.parent.html_url),
           }
         ]
       , []);
