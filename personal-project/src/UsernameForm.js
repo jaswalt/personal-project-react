@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { getGithubUserRepos, getGithubUserPullRequests } from './utils/getGithubUser.js';
-import DisplayUserInfo from './DisplayUserInfo.js';
-import NoUser from './NoUser.js';
+import { connect } from 'react-redux';
+import { fetchUserRepos } from './store/actions/repoActions';
+import { fetchUserPullRequests } from './store/actions/prsActions';
+import DisplayUserInfo from './DisplayUserInfo';
+import EnterUsername from './EnterUsername';
 
 class UsernameForm extends Component {
   constructor(props) {
@@ -9,9 +11,6 @@ class UsernameForm extends Component {
 
     this.state = {
       usernameValue: '',
-      userRepos: [],
-      userPullRequests: [],
-      displayUser: false,
     }
 
     this.handleChange = (this.handleChange.bind(this));
@@ -23,22 +22,15 @@ class UsernameForm extends Component {
   };
 
   handleSubmit(e) {
-    const reposPromise = getGithubUserRepos(this.state.usernameValue)
-      .then(repo => this.setState({ userRepos: repo }))
-      .catch(err => this.setState({ error: err }));
-
-    const pullsPromise = getGithubUserPullRequests(this.state.usernameValue) 
-      .then(pullReqs => this.setState({ userPullRequests: pullReqs}))
-      .catch(err => this.setState({ error: err }));
-
-    Promise.all([reposPromise, pullsPromise]).then(this.setState({ displayUser: true }));
+    this.props.fetchUserRepos(this.state.usernameValue)
+    this.props.fetchUserPullRequests(this.state.usernameValue)
 
     e.preventDefault()
   };
 
   render () {
-    const noUser = <NoUser />;
-    const displayUser = <DisplayUserInfo userRepos={this.state.userRepos} userPullRequests={this.state.userPullRequests} />;
+    const enterUsername = <EnterUsername />;
+    const displayUser = <DisplayUserInfo userRepos={this.props.userRepos[0]} userPullRequests={this.props.userPullRequests[0]} />;
 
     return (
       <div>
@@ -54,10 +46,25 @@ class UsernameForm extends Component {
           </input>
           <button type='submit'>Submit</button>
         </form>
-        {this.state.displayUser ? displayUser : noUser}
+        {this.props.displayRepos && this.props.displayPullRequests ? displayUser : enterUsername}
       </div>
     );
   };
 };
 
-export default UsernameForm;
+const mapStateToProps = store => ({
+  userRepos: store.repos.userRepos,
+  userPullRequests: store.prs.userPullRequests,
+  displayRepos: store.repos.displayRepos,
+  displayPullRequests: store.prs.displayPullRequests,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUserRepos: username => dispatch(fetchUserRepos(username)),
+  fetchUserPullRequests: username => dispatch(fetchUserPullRequests(username)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UsernameForm);
