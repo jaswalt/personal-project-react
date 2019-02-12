@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TO DO: display "status" property better
 export const UserPullRequests = ({ userPullRequests, loading }) => (
   <div>
     <h1>Pull Requests</h1>

@@ -25,6 +25,8 @@ export default function (state = initialState, action) {
         userRepos: [action.userRepos],
       };
     }
+    // TO DO: decide on next state
+    // clear current repos and prs displayed? or show error alongside them?
     case types.REPOS_FETCH_FAILURE: {
       return {
         ...state,

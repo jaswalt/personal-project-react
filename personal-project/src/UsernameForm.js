@@ -4,6 +4,7 @@ import { fetchUserRepos } from './store/actions/repoActions';
 import { fetchUserPullRequests } from './store/actions/prsActions';
 import { DisplayUserInfo } from './DisplayUserInfo';
 import { UsernamePrompt } from './UsernamePrompt';
+// TO DO: style everything
 
 class UsernameForm extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class UsernameForm extends Component {
   };
 
   render () {
+    // TO DO: username does not exist option
     const usernamePrompt = <UsernamePrompt />;
     const displayUser = <DisplayUserInfo 
       userRepos={this.props.userRepos[0]} 
@@ -37,9 +39,13 @@ class UsernameForm extends Component {
       pullRequestsLoading={this.props.pullRequestsLoading}
     />;
 
+    // TO DO: 
+    // make form own component
+    // rename UsernameForm
+    // do own error messaging on empty submit of form
+    // display GitHub username on page (since TO DO: clear name from input)
     return (
       <div>
-        {console.log('props ', this.props)}
         <form id='username-form' onSubmit={this.handleSubmit}>
           <label htmlFor='username-input'>GitHub Username</label>
           <input 
@@ -59,12 +65,16 @@ class UsernameForm extends Component {
 };
 
 const mapStateToProps = store => ({
+  // TO DO: can this be done more succinctly?
   userRepos: store.repos.userRepos,
   userPullRequests: store.prs.userPullRequests,
   displayRepos: store.repos.displayRepos,
   displayPullRequests: store.prs.displayPullRequests,
   reposLoading: store.repos.loading,
   pullRequestsLoading: store.prs.loading,
+  // TO DO: deal with error states
+  reposError: store.repos.error,
+  pullRequestsError: store.prs.error,
 });
 
 const mapDispatchToProps = {

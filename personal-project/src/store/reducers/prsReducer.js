@@ -25,6 +25,8 @@ export default function (state = initialState, action) {
         userPullRequests: [action.userPullRequests],
       };
     }
+    // TO DO: decide on next state
+    // clear current repos and prs displayed? or show error alongside them?
     case types.PRS_FETCH_FAILURE: {
       return {
         ...state,
