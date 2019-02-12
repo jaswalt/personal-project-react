@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserPullRequests = ({userPullRequests}) => (
+export const UserPullRequests = ({userPullRequests}) => (
   <div>
     <h1>Pull Requests</h1>
       <ul>
@@ -8,5 +8,3 @@ const UserPullRequests = ({userPullRequests}) => (
       </ul>
   </div>
 );
-
-export default UserPullRequests;

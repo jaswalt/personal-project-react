@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserRepos } from './store/actions/repoActions';
 import { fetchUserPullRequests } from './store/actions/prsActions';
-import DisplayUserInfo from './DisplayUserInfo';
-import EnterUsername from './EnterUsername';
+import { DisplayUserInfo } from './DisplayUserInfo';
+import { UsernamePrompt } from './UsernamePrompt';
 
 class UsernameForm extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class UsernameForm extends Component {
   };
 
   render () {
-    const enterUsername = <EnterUsername />;
+    const usernamePrompt = <UsernamePrompt />;
     const displayUser = <DisplayUserInfo userRepos={this.props.userRepos[0]} userPullRequests={this.props.userPullRequests[0]} />;
 
     return (
@@ -46,7 +46,7 @@ class UsernameForm extends Component {
           </input>
           <button type='submit'>Submit</button>
         </form>
-        {this.props.displayRepos && this.props.displayPullRequests ? displayUser : enterUsername}
+        {this.props.displayRepos && this.props.displayPullRequests ? displayUser : usernamePrompt}
       </div>
     );
   };
