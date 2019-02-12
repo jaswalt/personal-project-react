@@ -30,10 +30,16 @@ class UsernameForm extends Component {
 
   render () {
     const usernamePrompt = <UsernamePrompt />;
-    const displayUser = <DisplayUserInfo userRepos={this.props.userRepos[0]} userPullRequests={this.props.userPullRequests[0]} />;
+    const displayUser = <DisplayUserInfo 
+      userRepos={this.props.userRepos[0]} 
+      userPullRequests={this.props.userPullRequests[0]}
+      reposLoading={this.props.reposLoading}
+      pullRequestsLoading={this.props.pullRequestsLoading}
+    />;
 
     return (
       <div>
+        {console.log('props ', this.props)}
         <form id='username-form' onSubmit={this.handleSubmit}>
           <label htmlFor='username-input'>GitHub Username</label>
           <input 
@@ -57,6 +63,8 @@ const mapStateToProps = store => ({
   userPullRequests: store.prs.userPullRequests,
   displayRepos: store.repos.displayRepos,
   displayPullRequests: store.prs.displayPullRequests,
+  reposLoading: store.repos.loading,
+  pullRequestsLoading: store.prs.loading,
 });
 
 const mapDispatchToProps = {

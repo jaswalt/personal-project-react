@@ -4,7 +4,7 @@ import { UserPullRequests } from './UserPullRequests.js';
 
 export const DisplayUserInfo = props => (
   <div>
-    <UserRepos userRepos={props.userRepos} />
-    <UserPullRequests userPullRequests={props.userPullRequests} />
+    <UserRepos userRepos={props.userRepos} loading={props.reposLoading} />
+    <UserPullRequests userPullRequests={props.userPullRequests} loading={props.pullRequestsLoading} />
   </div>
 );
