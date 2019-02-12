@@ -59,10 +59,10 @@ const mapStateToProps = store => ({
   displayPullRequests: store.prs.displayPullRequests,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchUserRepos: username => dispatch(fetchUserRepos(username)),
-  fetchUserPullRequests: username => dispatch(fetchUserPullRequests(username)),
-});
+const mapDispatchToProps = {
+  fetchUserRepos,
+  fetchUserPullRequests,
+};
 
 export default connect(
   mapStateToProps,
