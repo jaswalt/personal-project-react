@@ -1,19 +1,19 @@
-import * as types from '../actions';
+import * as types from "../actions";
 
 const initialState = {
   loading: false,
   error: false,
   displayPullRequests: false,
-  userPullRequests: [],
-}
+  userPullRequests: []
+};
 
-export default function (state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case types.PRS_ARE_LOADING: {
       return {
         ...state,
         loading: true,
-        error: false,
+        error: false
       };
     }
     case types.PRS_FETCH_SUCCESS: {
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
         loading: false,
         error: false,
         displayPullRequests: true,
-        userPullRequests: [action.userPullRequests],
+        userPullRequests: [action.userPullRequests]
       };
     }
     // TO DO: decide on next state
@@ -31,11 +31,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        error: true,
+        error: true
       };
     }
     default: {
       return state;
     }
   }
-}
+};

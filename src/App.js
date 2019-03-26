@@ -1,19 +1,20 @@
-import React, { Component, mapStateToProps, mapDispatchToProps } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import { Store } from "./store";
 
-import UsernameForm from './UsernameForm.js';
-import './App.css';
+import UsernameForm from "./UsernameForm.js";
+import "./App.css";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <UsernameForm />
-      </div>
+      <Provider store={Store}>
+        <div className="App">
+          <UsernameForm />
+        </div>
+      </Provider>
     );
   }
 }
 
-const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default ConnectedApp;
+export default App;
